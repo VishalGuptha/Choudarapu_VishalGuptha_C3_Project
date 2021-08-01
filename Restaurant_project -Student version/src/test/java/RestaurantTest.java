@@ -23,6 +23,8 @@ class RestaurantTest {
     	LocalTime openingTime = LocalTime.parse("10:30:00");
         LocalTime closingTime = LocalTime.parse("22:00:00");
         Restaurant restaurant = new Restaurant(RESTAURANT_NAME,LOCATION,openingTime,closingTime);
+        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
+        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
         
         return restaurant;
         
@@ -62,8 +64,6 @@ class RestaurantTest {
     public void adding_item_to_menu_should_increase_menu_size_by_1(){
         
         restaurant =addRestaurant();
-        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
-        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
 
         int initialMenuSize = restaurant.getMenu().size();
         restaurant.addToMenu("Sizzling brownie",319);
@@ -72,9 +72,7 @@ class RestaurantTest {
     @Test
     public void removing_item_from_menu_should_decrease_menu_size_by_1() throws itemNotFoundException {
     	restaurant =addRestaurant();
-        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
-        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
-
+        
         int initialMenuSize = restaurant.getMenu().size();
         restaurant.removeFromMenu(VEGITABLE_LASAGNE);
         assertEquals(initialMenuSize-1,restaurant.getMenu().size());
@@ -82,9 +80,7 @@ class RestaurantTest {
     @Test
     public void removing_item_that_does_not_exist_should_throw_exception() {
     	restaurant =addRestaurant();
-        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
-        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
-
+        
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }

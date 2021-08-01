@@ -24,6 +24,9 @@ class RestaurantServiceTest {
         LocalTime closingTime = LocalTime.parse("22:00:00");
         Restaurant restaurant = service.addRestaurant(RESTAURANT_NAME,LOCATION,openingTime,closingTime);
         
+        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
+        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
+        
         return restaurant;
         
     }
@@ -66,8 +69,6 @@ class RestaurantServiceTest {
     public void remove_restaurant_should_reduce_list_of_restaurants_size_by_1() throws restaurantNotFoundException {
         
         restaurant = addRestaurant();
-        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
-        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
 
         int initialNumberOfRestaurants = service.getRestaurants().size();
         service.removeRestaurant(RESTAURANT_NAME);
@@ -78,8 +79,6 @@ class RestaurantServiceTest {
     public void removing_restaurant_that_does_not_exist_should_throw_exception() throws restaurantNotFoundException {
         
         restaurant = addRestaurant();
-        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
-        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
 
         assertThrows(restaurantNotFoundException.class,()->service.removeRestaurant("Pantry d'or"));
     }
@@ -88,8 +87,6 @@ class RestaurantServiceTest {
     public void add_restaurant_should_increase_list_of_restaurants_size_by_1(){
         
         restaurant = addRestaurant();
-        restaurant.addToMenu(SWEET_CORN_SOUP,PRICE_CONSTANT_119);
-        restaurant.addToMenu(VEGITABLE_LASAGNE, PRICE_CONSTANT_269);
 
         int initialNumberOfRestaurants = service.getRestaurants().size();
         service.addRestaurant("Pumpkin Tales",LOCATION,LocalTime.parse("12:00:00"),LocalTime.parse("23:00:00"));
