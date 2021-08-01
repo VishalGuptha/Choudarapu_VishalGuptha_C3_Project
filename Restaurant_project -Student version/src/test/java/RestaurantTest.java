@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -85,4 +87,17 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
+    
+    //>>>>>>>>>>>>>>>>>>>>>>TOTAL COST<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    @Test
+    public void get_total_price_for_selected_items_should_return_expected_total_cost()
+    {
+    	restaurant =addRestaurant();
+    	List<String> itemNames = Arrays.asList(SWEET_CORN_SOUP,VEGITABLE_LASAGNE);
+    	
+    	int totalCost = restaurant.getTotalPriceForSelectedItems(itemNames);
+    	
+    	assertEquals(388,totalCost);
+    }
 }
