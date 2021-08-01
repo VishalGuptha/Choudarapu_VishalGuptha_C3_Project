@@ -70,10 +70,16 @@ public class Restaurant {
     }
     
     
-    public int getTotalPriceForSelectedItems(List<String> itemNames)
-    {
-    	
-    	return 0;
-    }
+	public int getTotalPriceForSelectedItems(List<String> itemNames) {
+
+		int totalCost = 0;
+
+		for (String itemName : itemNames) {
+			Item item = findItemByName(itemName);
+			totalCost = totalCost + item.getPrice();
+		}
+
+		return totalCost;
+	}
 
 }
